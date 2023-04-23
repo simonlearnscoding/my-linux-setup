@@ -17,9 +17,8 @@ unzip /tmp/FiraMono.zip -d ~/.local/share/fonts/FiraMonoNerdFont
 fc-cache -fv
 
 # Set FuraMono Nerd Font Mono as the default terminal font
-PROFILE_ID=$(dconf list /org/gnome/terminal/legacy/profiles:/ | grep -E '^:[a-z0-9]+/' | head -n1)
-dconf write /org/gnome/terminal/legacy/profiles:/${PROFILE_ID}font "'FuraMono Nerd Font Mono 12'"
-
+PROFILE_ID=$(gsettings get org.gnome.Terminal.ProfilesList default | tr -d \')
+gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${PROFILE_ID}/ font 'FuraMono Nerd Font Mono 12'
 # Clean up
 rm /tmp/FiraMono.zip
 
